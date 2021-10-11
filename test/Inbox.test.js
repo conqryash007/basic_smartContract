@@ -6,7 +6,9 @@ const { abi, bytecode } = require("./../compile");
 //set up a provider
 //provider is a interface between some etherium network and web3
 
-const web3 = new Web3(ganache.provider()); // 1. instance of Web3 class
+const provider = ganache.provider();
+const web3 = new Web3(provider);
+// 1. instance of Web3 class
 // 2. constructor function called with a provider
 
 //////////////// Basics of Mocha //////////////////
@@ -40,10 +42,23 @@ beforeEach(async () => {
       arguments: ["hello"],
     })
     .send({ from: accounts[0], gas: 1000000 });
+
+  inbox.setProvider = provider;
 });
 
 describe("Inbox", () => {
-  it("", () => {
-    console.log(inbox);
+  it("deploys a contract", () => {
+    assert.ok(inbox.options.address);
+  });
+
+  it("has default string", async () => {
+    const message = await inbox.methods.message().call();
+    assert.strictEqual(message, "hello");
+  });
+
+  it("updates the message", async () => {
+    await inbox.methods.setMessage("Bye!").send({ from: accounts[0] });
+    const newMessage = await inbox.methods.message().call();
+    assert.strictEqual(newMessage, "Bye!");
   });
 });
