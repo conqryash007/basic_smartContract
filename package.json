@@ -7,6 +7,7 @@
     "ganache-cli": "^6.12.2",
     "mocha": "^9.1.2",
     "solc": "^0.8.9",
+    "truffle-hdwallet-provider": "^1.0.17",
     "web3": "^1.6.0"
   },
   "devDependencies": {},
