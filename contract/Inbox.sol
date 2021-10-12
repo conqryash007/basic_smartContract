@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.9; // state the version of solidity
+pragma solidity ^0.8.9; 
+// state the version of solidity
+//latest version ==> 2021
 
 // contract == class in js
 
